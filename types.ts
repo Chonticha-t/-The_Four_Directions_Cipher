@@ -1,0 +1,32 @@
+
+export const GameStage = {
+  SPLASH: 'SPLASH',
+  BRIEFING: 'BRIEFING',
+  MAP: 'MAP',
+  ACCUSE: 'ACCUSE',
+  CRYPTO: 'CRYPTO',
+  AUTH: 'AUTH',
+  AUTHZ: 'AUTHZ',
+  COMPLETE: 'COMPLETE',
+} as const;
+
+export type GameStage = (typeof GameStage)[keyof typeof GameStage];
+
+export interface CaseStatus {
+  stage: GameStage;
+  timer: number;
+  hintsUsed: number;
+  progress: number;
+  flags: {
+    crypto: string | null;
+    auth: string | null;
+    authz: string | null;
+  };
+}
+
+export interface TerminalLine {
+  timestamp: string;
+  type: 'INFO' | 'SYSTEM' | 'LOAD' | 'WARN' | 'EXEC' | 'SUCCESS' | 'TASK' | 'ERR';
+  content: string;
+  details?: string;
+}
